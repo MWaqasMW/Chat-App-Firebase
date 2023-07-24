@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="/dist/output.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+</head>
+  <body>
+
+
+
+
+
+    <div class="main">
+
+        <div class="container">
+        <div class="row justify-content-center login-container">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="profile-top">
+                            <h3>Profile</h3>
+                          
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-text-fill  text-icon" viewBox="0 0 16 16">
+                                <path d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353V2zM3.5 3h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1zm0 2.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1zm0 2.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1z"/>
+                            </svg>
+                     
+                        </div>
+                        <div class="user-picture">
+                            <img id="user-profile" src="images/user.png" alt="">
+                            <label class="camera-icon" for="file-input">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera-fill" viewBox="0 0 16 16">
+                                    <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                    <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
+                                  </svg>
+                            </label>
+                            <input id="file-input" style="display: none;" type="file">
+                        </div>
+                        <div class="mt-4">
+                            <input class="form-control" type="text" placeholder="Full name" id="fullName" disabled>
+                        </div>
+                        <div class="mt-4">
+                            <input class="form-control" type="email" placeholder="Email" id="email" disabled>
+                        </div>
+                        <div class="mt-4">
+                            <input class="form-control" type="phone" placeholder="phone" id="phone" disabled>
+                        </div>
+
+                        <div class="d-grid mt-4">
+                            <button id="update-profile" class="btn btn-primary" type="button">Update profile</button>
+                        </div>
+                        <div class="d-grid mt-4">
+                            <button id="logout-btn" class="btn btn-outline-danger" type="button">LOGOUT</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+        
+        <!-- <div class="card" style="width: 18rem;">
+            <div class="card-body">
+            <div class="profile-top ">
+                <h3>Profile</h3>
+              
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-text-fill  text-icon" viewBox="0 0 16 16">
+                    <path d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353V2zM3.5 3h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1zm0 2.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1zm0 2.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1z"/>
+                </svg>
+         
+            </div>
+         
+              <p class="card-text profile-pic"><img src="./images/user.png" alt="" width="90px"></p>
+            </div>
+          </div> -->
+        </div>
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script type="module" src="app.js"></script>
+    <script  src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
+      </body>
+  </html> 
+  
