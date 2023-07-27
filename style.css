@@ -181,8 +181,18 @@ font-size: 22px;
 
 /* chat Section */
 
-.chat-section .left-contionor{
-  width: 400px;
+.chat-section{
+  display: flex;
+}
+.chat-section .right-contionor  .top-L{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.3rem;
+}
+
+.chat-section .left-contionor {
+  width: 500px;
   height: 100vh;
   background-color: rgb(46, 53, 53);
 }
@@ -271,10 +281,75 @@ font-size: 22px;
 
 .message-sec li >div{
  display: flex;
+align-items: center;
   padding: 1rem;
 
 }
 
+.right-containor{
+width: 100%;
+height: 100vh;
+background-color: #beb8b8;
+}
+.profile-opt i{
+  padding: 0.7rem;
+  cursor: pointer;
+}
+.profile-opt i:hover{
+  color: black;
+}
+
+.right-containor >hr{
+  padding: 1rem;
+  margin: 1rem;
+  color: #333;
+}
 /* From uiverse.io by @satyamchaudharydev */
 /* removing default style of button */
+
+.chat-containor{
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+  width: 95%;
+  height: 60vh;
+  overflow-y: auto;
+  overflow-x: 0;
+  padding: 1rem;
+  margin:0 auto;
+  
+}
+
+.message-box {
+  width: 100%;
+ 
+  padding: 1rem;
+  color: #667682;
+  border-radius: 5px;
+}
+.message-box .msg{
+  width: 45%;
+  background-color: #c7e3f9;
+  padding: 1rem;
+  margin-top: 0.8rem;
+  border-radius: 10px;
+}
+.message-box .msg1{
+  width: 45%;
+  background-color: #6daad7;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-left: auto;
+margin-top: 0.8rem;
+}
+.right-message {
+ 
+  color: #141414;
+  margin-left: auto;
+
+}
+
+.msg-sent-sec{
+  margin: 3rem auto;
+  display: flex;
+  justify-content: center;
+}
 

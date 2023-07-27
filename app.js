@@ -6,12 +6,13 @@
   
   
   const firebaseConfig = {
-    apiKey: "AIzaSyCD03uh2aQWGYB1IsZh1o7zjV0DxLrCSMw",
-    authDomain: "login-signup-9fca4.firebaseapp.com",
-    projectId: "login-signup-9fca4",
-    storageBucket: "login-signup-9fca4.appspot.com",
-    messagingSenderId: "485276283878",
-    appId: "1:485276283878:web:8ae6c7c7de45b8cfda9c27"
+    apiKey: "AIzaSyAsSTcbkHHbXnnsbFv2GIfp1Q9JrN-bPmY",
+    authDomain: "chat-app-772e5.firebaseapp.com",
+    projectId: "chat-app-772e5",
+    storageBucket: "chat-app-772e5.appspot.com",
+    messagingSenderId: "594972580748",
+    appId: "1:594972580748:web:e6c53f4e1009d9106994a9",
+    measurementId: "G-D44KEDY6EX"
   };
 
   // Initialize Firebase
@@ -57,12 +58,21 @@ createUserWithEmailAndPassword(auth, userData.email, userData.password)
          console.log("added")
        } catch (e) {
          console.error("Error adding document: ", e);
+         swal({
+          title: "Opps",
+          text: e,
+         
+        });
            }
      })
          .catch((error) => {
        
            const errorMessage = error.message;
-         console.log("errorMessage",errorMessage );
+           swal({
+            title: "Opps",
+            text: error.message,
+           
+          });
          })
 
         })
@@ -84,11 +94,17 @@ console.log("welcome to my website")
   localStorage.setItem("uid", user.uid)
    location.href = "profile.html"
 } catch (err) {   console.log(err)
+
 }
   })
   .catch((error) => {
 
     console.log("error.message",error.message)
+    swal({
+      title: "Opps",
+      text: error.message,
+     
+    });
   });
 
 
