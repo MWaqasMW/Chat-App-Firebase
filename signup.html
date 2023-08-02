@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Chat-App</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
@@ -33,32 +33,36 @@
     <p class="heading">Signup</p>
 
 <div class="inputContainer">
-    <img src="images/user.png" alt=""><input type="text"  class="inputField" id="user-name" placeholder="User">
+    <img src="images/user.png" alt=""><input type="text"  class="inputField" id="user-name" placeholder="User" required>
 
     </div>
     <div class="inputContainer">
         <img src="images/phone-receiver-silhouette.png" alt="">
-     <input type="number" class="inputField" id="user-number" placeholder="Phone">
+     <input type="number" class="inputField" id="user-number" placeholder="Phone" required>
      </div>
 
     <div class="inputContainer">
        <img src="images/arroba.png" alt="">
-    <input type="email" class="inputField" id="user-email" placeholder="Email">
+    <input type="email" class="inputField" id="user-email" placeholder="Email"  required >
     </div>
     
 <div class="inputContainer">
  <img src="images/key.png" alt="">
-    <input type="password" class="inputField" id="password" placeholder="Password">
+    <input type="password" class="inputField" id="password" placeholder="Password" required>
 </div>
               
            
-<div><button id="signUp" class="my-btn">Signup</button> </div>
+<div><button id="signUp" class="my-btn">SignUp</button> </div>
 <a href="index.html">Login</a>
+<div>
     <a class="forgotLink" href="#">Forgot your password?</a>
+      <div class="loader" id="loader"></div>
+    
+  </div>
 </div>
 
 
-
+</div>
 <!-- sperad -->
 
 
