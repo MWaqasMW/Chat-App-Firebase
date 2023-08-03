@@ -19,8 +19,8 @@
   <div class="chat-section">
     <div class="left-contionor">
       <div class="top-L">
-        <div class="d-flex align-items--center">
-          <img src="./images/user.png" alt="" width="80px"><div><span class="title">Waqas</span><div>waqas@gmail.com</div></div>
+        <div class="top-L">
+          <img src="./images/user.png" alt="" width="80px" id="uProfile_img" class="img"><div><span class="title" id="uName"></span><div id="uEmail"></div></div>
         </div>
         <div class="profile-opt"><i class="bi bi-pen"></i></div>
       </div>
@@ -34,48 +34,15 @@
         </svg>
       </div>
 
-      <div class="message-sec">
-        <li>
-          <div>
-            <img src="./images/user.png" alt="" width="50px">
-            <div >
-              <div class="name">Waqas</div>
-              <div>waqas@gmail.com</div>
-            </div>
-          </div>
-          <div>
-            <div class="time">12:00Am</div>
-            <div class="notify">
-              <!-- <div class=" badge rounded-pill bg-danger">
-                99+
+      <div class="message-sec " id="Users-sec">
+      
+       <div class="spiner-sec" id="spinerUsers">
 
-              </div> -->
-            </div>
-          </div>
-        </li>
-
-        <li>
-          <div>
-            <img src="./images/user.png" alt="" width="50px">
-            <div >
-              <div class="name">Waqas</div>
-              <div>waqas@gmail.com</div>
-            </div>
-          </div>
-          <div>
-            <div class="time">12:00Am</div>
-            <div class="notify">
-              <!-- <div class=" badge rounded-pill bg-danger">
-                99+
-
-              </div> -->
-            </div>
-          </div>
-        </li>
-
-     
-
- 
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+       </div>
+        
       </div>
 
 
@@ -89,8 +56,10 @@
 
     <div class="right-containor">
       <div class="top-L">
-        <div class="d-flex align-items--center">
-          <img src="./images/user.png" alt="" width="80px"><div><span class="title">Waqas</span><div>waqas@gmail.com</div></div>
+        <div class="top-L" >
+          <img src="images/user.png" width="80px" id="select-img">
+          <div><span class="title" id="select-user"></span>
+            <div id="select-email"></div></div>
         </div>
         <div class="profile-opt"><div><i class="bi bi-bell"></i><i class="bi bi-heart"></i></div>
   
@@ -149,6 +118,7 @@
       integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
       crossorigin="anonymous"></script>
     <script type="module" src="app.js"></script>
+    <script type="module" src="chat.js"></script>
     <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
 </body>
 

@@ -2,7 +2,7 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged,signOut  } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, doc, setDoc, getDoc, updateDoc  } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, doc, setDoc, getDoc, updateDoc,getDocs  } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
 import { getStorage, ref,uploadBytesResumable,getDownloadURL, } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js";
 
 const firebaseConfig = {
@@ -23,6 +23,7 @@ const db = getFirestore(app);
 const storage = getStorage();
 
 const profile_img=document.getElementById("profile-img")
+
 
 const uploadFiles=(file)=>{
 
@@ -54,18 +55,18 @@ return new Promise((resolve, reject) => {
     await  getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
         resolve (downloadURL);
        
-        async (downloadURL)=>{
-          // Replace 'users' with your desired collection name and 'user_id' with the user's unique identifier
-        await  firestore.collection('users').doc('user_id').set({
-          imageUrl: downloadURL
-          }, { merge: true })
-          .then(() => {
-              console.log('Image URL saved to Firestore');
-          })
-          .catch((error) => {
-              console.error('Error saving image URL to Firestore:', error);
-          });
-        }
+        // async (downloadURL)=>{
+        //   // Replace 'users' with your desired collection name and 'user_id' with the user's unique identifier
+        // await  firestore.collection('users').doc('user_id').set({
+        //   imageUrl: downloadURL
+        //   }, { merge: true })
+        //   .then(() => {
+        //       console.log('Image URL saved to Firestore');
+        //   })
+        //   .catch((error) => {
+        //       console.error('Error saving image URL to Firestore:', error);
+        //   });
+        // }
       });
     },
 
@@ -94,6 +95,7 @@ updateProfile && updateProfile.addEventListener("click", async () => {
     let fullName = document.getElementById("fullName")
     let phone = document.getElementById("phone")
     const imageUrl = await uploadFiles(fileInput.files[0])
+    console.log(imageUrl)
     const firestoreRef = doc(db, "users", uid);
     await updateDoc(firestoreRef, {
         fullName: fullName.value,
@@ -208,7 +210,7 @@ loginBtn && loginBtn.addEventListener("click", () => {
 })
 
 
-
+const defaultImg =`images/user.png`
 
 
 
@@ -220,20 +222,32 @@ let getUser =  async(uid) => {
   const docRef =await doc(db, "users", uid);
   const docSnap = await getDoc(docRef);
 
-  if ( await docSnap.exists()) {
+  if (  docSnap.exists()) {
    
     console.log("Document data:", docSnap.data().email);
-fullName.value = docSnap.data().user
+  
+   fullName.value = docSnap.data().user
 email.value = docSnap.data().email
+
 phone.value = docSnap.data().phone
-profile_img.src= docSnap.data().picture
-    console.log(profile_img.value)
-  } else {
+if( docSnap.data().picture){
+
+   profile_img.src =  docSnap.data().picture 
+}
+else{
+  profile_img.src =  defaultImg
+}
+
+    }
+ 
+   else {
     // docSnap.data() will be undefined in this case
     console.log("No such document!");
   }
  
 }
+
+
 onAuthStateChanged(auth, (user) => {
   const uid = localStorage.getItem("uid")
   if (user && uid) {
@@ -261,6 +275,12 @@ logoutBtn && logoutBtn.addEventListener('click', () => {
     });
 
 })
+
+
+
+
+
+
 
 
 
