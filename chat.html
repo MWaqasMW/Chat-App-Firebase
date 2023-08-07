@@ -6,11 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Chat-App</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-  <link href="/dist/output.css" rel="stylesheet">
+  integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link href="/dist/output.css" rel="stylesheet">
 
 </head>
 
@@ -22,7 +22,7 @@
         <div class="top-L">
           <img src="./images/user.png" alt="" width="80px" id="uProfile_img" class="img"><div><span class="title" id="uName"></span><div id="uEmail"></div></div>
         </div>
-        <div class="profile-opt"><i class="bi bi-pen"></i></div>
+       <a href="profile.html"> <div class="profile-opt"><i class="bi bi-pen"></i></div></a>
       </div>
 
       <div class="container-input">
@@ -54,7 +54,7 @@
     </div>
 
 
-    <div class="right-containor">
+    <div class="right-containor" id="right-containor">
       <div class="top-L">
         <div class="top-L" >
           <img src="images/user.png" width="80px" id="select-img">
@@ -68,49 +68,13 @@
     </div>
     <hr>
     <hr>
-    <div class="chat-containor">
+    <div class="chat-containor" id="chatContainor">
 
 
-  <div class="message-box left-message">
-    <div class="msg">
-    Hi, How are you?
-  </div>
-  <div class="msg">
-    Hi, How are you?
-  </div>
- 
-  <div class="msg">
-    Hi, How are you?
-  </div>
-</div>
-
-
-
-  <div class="message-box right-message">
-    <div class="msg1">
-    I'm fine
-</div>
-<div class="msg">
-  Hi, How are you?
-</div>
-
-<div class="msg">
-  Hi, How are you?
-</div>
-
-<div class="msg">
-  Hi, How are you?
-</div>
-
-<div class="msg">
-  Hi, How are you?
-</div>
 
 </div>
-
+<div class="msg-sent-sec"><input type="text" placeholder="write text" name="text" class="input" id="message-send"></div>
 </div>
-<div class="msg-sent-sec"><input type="text" placeholder="write text" name="text" class="input"></div>
-
 
 
 
@@ -120,6 +84,7 @@
     <script type="module" src="app.js"></script>
     <script type="module" src="chat.js"></script>
     <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
-</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js" integrity="sha512-42PE0rd+wZ2hNXftlM78BSehIGzezNeQuzihiBCvUEB3CVxHvsShF86wBWwQORNxNINlBPuq7rG4WWhNiTVHFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </body>
 
 </html>

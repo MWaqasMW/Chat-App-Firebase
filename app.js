@@ -251,7 +251,7 @@ else{
 onAuthStateChanged(auth, (user) => {
   const uid = localStorage.getItem("uid")
   if (user && uid) {
-      console.log(user)
+      
       getUser(user.uid)
       if (location.pathname !== '/profile.html'&& location.pathname !== '/chat.html') {
           location.href = "profile.html"
