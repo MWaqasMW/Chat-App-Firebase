@@ -218,6 +218,7 @@ font-size: 22px;
 .chat-section{
   display: flex;
   font-family: 'Lobster', cursive;
+  background-color: aliceblue;
   
 }
 .chat-section .right-contionor  .top-L{
@@ -226,12 +227,26 @@ font-size: 22px;
   align-items: center;
   padding: 1.3rem;
   height: auto;
+  
 }
 
  .top-L .title{
   font-size: 22px;
   font-weight: 700;
   color: #0071e2;
+}
+
+.chat-section .start-sec-right{
+  background-color: aliceblue;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat-section .start-sec-right> h1{
+  text-align: center;
+  margin: 0 auto;
 }
 
 .chat-section .right-contionor{
@@ -302,7 +317,7 @@ font-size: 22px;
 
   margin-left: 0.2rem;
   margin-right: 0.4rem;
-  height: 100%;
+  height: 80px;
   border-radius: 50%;
  
 }
@@ -318,6 +333,23 @@ font-size: 22px;
   
   
 }
+
+
+
+.green{
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: green;
+}
+.red{
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: red;
+}
+
+
 
 .input {
   width: 90%;
@@ -353,6 +385,23 @@ font-size: 22px;
 }
 
 
+.message-sec::-webkit-scrollbar {
+  width: 9px;               /* width of the entire scrollbar */
+}
+
+.message-sec::-webkit-scrollbar-track {
+  background: #dadfe4;        /* color of the tracking area */
+}
+
+.message-sec::-webkit-scrollbar-thumb {
+  background-color: #0071e2;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid #0071e2;  /* creates padding around scroll thumb */
+}
+
+
+
+
 
 
 
@@ -380,7 +429,7 @@ align-items: center;
 
   margin-left: 0.2rem;
   margin-right: 0.4rem;
-  height: 100%;
+  height: 60px;
   border-radius: 50%;
 }
 
@@ -396,11 +445,12 @@ align-items: center;
 width: 100%;
 height: auto;
 padding-bottom: 0.3rem;
-background-color: #fff;
+background-image: url(./images/img.png);
 display: none;
 }
 .profile-opt i{
   padding: 0.7rem;
+  font-size: 35px;
   cursor: pointer;
 }
 .profile-opt i:hover{
@@ -418,17 +468,48 @@ display: none;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.09) 0px 8px 32px;
   
   width: 95%;
-  height: 53vh;
+  height: 60vh;
   overflow: auto;
   overflow-y:scroll ;
   display: flex;
   flex-direction: column-reverse;
-  
   overflow-x: 0;
   padding: 1rem;
   margin:0 auto;
   
 }
+
+.chat-containor::-webkit-scrollbar {
+  width: 9px;               /* width of the entire scrollbar */
+}
+
+.chat-containor::-webkit-scrollbar-track {
+  background: #dadfe4;        /* color of the tracking area */
+}
+
+.chat-containor::-webkit-scrollbar-thumb {
+  background-color: #0071e2;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid #0071e2;  /* creates padding around scroll thumb */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .message-box {
   width: 100%;
@@ -490,7 +571,7 @@ justify-content: flex-end;
 
 
 .msg-sent-sec{
-  margin: 3rem auto;
+  margin: 2rem auto;
   display: flex;
   justify-content: center;
 }
@@ -508,4 +589,10 @@ align-items: center;
 .spiner-sec>div{
   width: 80px;
   height: 80px;
+}
+
+.Message{
+  width: 90%;
+  margin: 2rem auto;
+ 
 }

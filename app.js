@@ -1,24 +1,11 @@
 
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged,signOut  } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, doc, setDoc, getDoc, updateDoc,getDocs  } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
+import {  createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged,signOut } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
+import {  doc, setDoc, getDoc, updateDoc,  } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
 import { getStorage, ref,uploadBytesResumable,getDownloadURL, } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAsSTcbkHHbXnnsbFv2GIfp1Q9JrN-bPmY",
-  authDomain: "chat-app-772e5.firebaseapp.com",
-  projectId: "chat-app-772e5",
-  storageBucket: "chat-app-772e5.appspot.com",
-  messagingSenderId: "594972580748",
-  appId: "1:594972580748:web:e6c53f4e1009d9106994a9",
-  measurementId: "G-D44KEDY6EX"
-};
+import {db,auth} from './firebase.js'
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+
 
 const storage = getStorage();
 
@@ -137,7 +124,7 @@ signupBtn && signupBtn.addEventListener("click",async () => {
     phone: phone.value,
     email: email.value,
     password: password.value,
-    // imageUrl:imageUrl.value
+  
   }
 
 
