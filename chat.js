@@ -175,11 +175,11 @@ let getUserOne = (fullName, email, picture, userSelectdId) => {
   } else {
     chatId = currentUid + SelectedId
   }
-
+  
   SelectedId = userSelectdId
-
-
-
+  
+  
+  
   if (picture == "undefined") {
     if (email == "undefined") {
       selectEmail.innerHTML = "@...";
@@ -187,21 +187,23 @@ let getUserOne = (fullName, email, picture, userSelectdId) => {
     if (fullName == "undefined") {
       selectUser.innerHTML = "Unknown"
     }
-
+    
     selectImg.src = "images/user.png"
-
+    
   }
   else {
-
+    
     selectImg.src = picture;
     selectUser.innerHTML = fullName;
     selectEmail.innerHTML = email;
   }
   
   
-  getAllMessages(chatId);
   let rightContainor = document.getElementById("right-containor");
   rightContainor.style.display = "block"
+
+  getAllMessages(chatId);
+
 }
 
 window.getUserOne = getUserOne;
@@ -290,10 +292,9 @@ let getAllMessages = (chatId) => {
   const unsubscribe = onSnapshot(q,  (querySnapshot) => {
     const messages = [];
     querySnapshot.forEach( (doc) => {
-console.log(doc.data())
       messages.push(doc.data());
+      chatContainor.innerHTML = "";
       for (var i = 0; i < messages.length; i++) {
-        chatContainor.innerHTML = "";
         let time = messages[i].timestamp ? moment(messages[i].timestamp.toDate()).fromNow() : moment().fromNow()
         
         if (currentUid === messages[i].senderId) {
@@ -343,6 +344,7 @@ console.log(doc.data())
 
 
 }
+
 
 let statusChek =  (status) => {
   const currentUid = localStorage.getItem("uid")
@@ -397,11 +399,4 @@ let deletMsg = async (messageId, messages) => {
 }
 
 window.deletMsg = deletMsg;
-
-
-
-
-
-
-
 

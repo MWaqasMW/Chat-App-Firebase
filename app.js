@@ -177,6 +177,7 @@ loginBtn && loginBtn.addEventListener("click", () => {
       try {
         console.log("welcome to my website")
         localStorage.setItem("uid", user.uid)
+        console.log(user.uid)
         location.href = "profile.html"
       } catch (err) {
         console.log(err)
@@ -262,51 +263,3 @@ logoutBtn && logoutBtn.addEventListener('click', () => {
     });
 
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// })
-
