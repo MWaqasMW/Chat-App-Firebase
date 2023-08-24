@@ -1,13 +1,15 @@
-
 import {  createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged,signOut } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
 import {  doc, setDoc, getDoc, updateDoc,  } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
 import { getStorage, ref,uploadBytesResumable,getDownloadURL, } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js";
 import {db,auth} from './firebase.js'
 
+// import {createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged,signOut,doc, setDoc, getDoc, updateDoc,  getStorage, ref,uploadBytesResumable,getDownloadURL, db,auth } from './firebase.js'
 // Initialize Firebase
 
 
 const storage = getStorage();
+
+
 
 const profile_img=document.getElementById("profile-img")
 
@@ -42,18 +44,7 @@ return new Promise((resolve, reject) => {
     await  getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
         resolve (downloadURL);
        
-        // async (downloadURL)=>{
-        //   // Replace 'users' with your desired collection name and 'user_id' with the user's unique identifier
-        // await  firestore.collection('users').doc('user_id').set({
-        //   imageUrl: downloadURL
-        //   }, { merge: true })
-        //   .then(() => {
-        //       console.log('Image URL saved to Firestore');
-        //   })
-        //   .catch((error) => {
-        //       console.error('Error saving image URL to Firestore:', error);
-        //   });
-        // }
+ 
       });
     },
 

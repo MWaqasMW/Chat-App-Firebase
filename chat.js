@@ -1,5 +1,6 @@
+// import {db,auth, onAuthStateChanged,getStorage ,collection, addDoc, doc, getDoc, updateDoc, getDocs, where, query, onSnapshot, serverTimestamp, orderBy, deleteDoc  } from "./firebase";
 import {onAuthStateChanged  } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
-import {collection, addDoc, doc, getDoc, updateDoc, getDocs, where, query, onSnapshot, serverTimestamp, orderBy, deleteDoc} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
+import {collection, addDoc, doc, getDoc, updateDoc, getDocs, where, query, onSnapshot, serverTimestamp, orderBy, deleteDoc,increment} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
 import { getStorage} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js";
 import {db,auth} from './firebase.js'
 
@@ -9,6 +10,10 @@ import {db,auth} from './firebase.js'
 
 
 const storage = getStorage();
+
+
+
+
 
 let UsersSec = document.getElementById("Users-sec")
 
@@ -47,75 +52,52 @@ let hideloderLoaderUsers = () => {
 let img = "images/user.png"
 
 
+const users =[]
+console.log(users)
 let getAllUsers = async (email) => {
 
   const q = query(collection(db, "users"), where("email", "!=", email));
-  const querySnapshot = await getDocs(q);
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
   showLoaderUsers() || querySnapshot.forEach((doc) => {
-    const user = searchUser(doc.data());
+    users.push(doc.data());
   
-console.log(user)
+console.log(users)
 hideloderLoaderUsers()
-if(user){
-  const { fullName, email, picture, uid, Active } = user;
+
+  // const { fullName, email, picture, uid, Active  } = user;
 
       
 
-        UsersSec.innerHTML += `
-        <li onclick="getUserOne('${fullName}','${email}','${picture}','${uid}')">
-      <div>
-      <img src="${picture || img}" alt="" width="50px">
-      <div >
-      <div class="name">${fullName || "Unknown"}</div>
-      <div >${email}</div>
-      </div>
-      </div>
-      <div>
-      <div class="${Active ? "green" : "red"}"></div>
-      <div class="notify">
-      <!-- <div class=" badge rounded-pill bg-danger">
-      99+
-
-      </div> -->
-      </div>
-      </div>
-      </li>
-      
-        `
+  const { fullName, email, picture, uid, Active,notification } = doc.data()
+  UsersSec.innerHTML += `
+  <li onclick="getUserOne('${fullName}','${email}','${picture}','${uid}')">
+  <div>
+  <img src="${picture || img}" alt="" width="50px">
+  <div >
+  <div class="name">${fullName || "Unknown"}</div>
+<div >${email}</div>
+</div>
+</div>
+<div class=d-block'>
+<div class="notify p-1">
+${notification ?  `<span class="badge bg-danger rounded-pill ">${notification}</span>` : ""}
+</div>
+<div class="${Active ? "green" : "red"} p-1"></div>
+  </div>
+  </li>
+  
+  `
         
-      }
+      
       
 
-      else{
-        const { fullName, email, picture, uid, Active } = doc.data()
-        UsersSec.innerHTML += `
-        <li onclick="getUserOne('${fullName}','${email}','${picture}','${uid}')">
-        <div>
-        <img src="${picture || img}" alt="" width="50px">
-        <div >
-        <div class="name">${fullName || "Unknown"}</div>
-      <div >${email}</div>
-      </div>
-      </div>
-      <div>
-      <div class="${Active ? "green" : "red"}"></div>
-      <div class="notify">
-      <!-- <div class=" badge rounded-pill bg-danger">
-        99+
-        
-        </div> -->
-        </div>
-        </div>
-        </li>
-        
-        `
-      }
+    
+    // console.log(notification)
       
     })
-      }
+      })
   
-      
-    
+    }
     
 
 
@@ -126,6 +108,9 @@ let uProfile_img = document.getElementById("uProfile_img")
 
 
 let getUser = async (uid) => {
+
+  let chatContainor = document.getElementById("chatContainor");
+  chatContainor.innerHTML = "";
   let uName = document.getElementById("uName");
   let uEmail = document.getElementById("uEmail");
 
@@ -156,7 +141,10 @@ onAuthStateChanged(auth, async (user) => {
 
 let SelectedId;
 
-let getUserOne = (fullName, email, picture, userSelectdId) => {
+let getUserOne = async(fullName, email, picture, userSelectdId) => {
+
+  
+  
   let beforeContainor = document.getElementById("before-containor")
   beforeContainor.style.display="none";
   let chatContainor = document.getElementById("chatContainor");
@@ -184,7 +172,7 @@ let getUserOne = (fullName, email, picture, userSelectdId) => {
     if (email == "undefined") {
       selectEmail.innerHTML = "@...";
     }
-    if (fullName == "undefined") {
+    if (fullName === "undefined") {
       selectUser.innerHTML = "Unknown"
     }
     
@@ -201,15 +189,17 @@ let getUserOne = (fullName, email, picture, userSelectdId) => {
   
   let rightContainor = document.getElementById("right-containor");
   rightContainor.style.display = "block"
-
+  
+  
   getAllMessages(chatId);
 
+ 
 }
 
 window.getUserOne = getUserOne;
 
 
-let onSend=()=> {
+let onSend=async()=> {
 
   let currentUid = localStorage.getItem('uid')
 
@@ -221,7 +211,7 @@ let onSend=()=> {
   }
 
 
-  var docRef = addDoc(collection(db, "messages"), {
+  let docRef =await addDoc(collection(db, "messages"), {
 
     message: messageSend.value,
     chatId: chatId,
@@ -231,27 +221,27 @@ let onSend=()=> {
 
 
   })
+  
     .then((docRef) => {
       let msgId = docRef.id
       let updatesDoc =  (msgId) => {
         const washingtonRef = doc(db, "messages", msgId);
         let messageSend = document.getElementById("message-send");
-       
        updateDoc(washingtonRef, {
           message: messageSend.value,
           chatId: chatId,
           senderId: currentUid,
           receiverId: SelectedId,
           timestamp: serverTimestamp(),
-          documentId: msgId
+          documentId: msgId,
         });
         messageSend.value = "";
       }
+      
+      
       updatesDoc(msgId)
-
-
     })
-
+    
     .catch((error) => {
       console.error("Error adding document: ", error);
     });
@@ -269,14 +259,14 @@ let onSend=()=> {
 let messageSend = document.getElementById("message-send");
 let msgBtn = document.getElementById("msg-btn")
 
-msgBtn.addEventListener  ("click", async (e) => {
+msgBtn && msgBtn.addEventListener  ("click", async (e) => {
  
 
   onSend()
 
 });
 
-messageSend.addEventListener("keydown", (e) => {
+messageSend && messageSend.addEventListener("keydown", (e) => {
  
   if (e.keyCode === 13) {
     onSend()
@@ -290,16 +280,15 @@ let getAllMessages = (chatId) => {
   let currentUid = localStorage.getItem('uid');
   const q = query(collection(db, "messages"), orderBy("timestamp", "desc"), where("chatId", "==", chatId));
   const unsubscribe = onSnapshot(q,  (querySnapshot) => {
-    const messages = [];
-    querySnapshot.forEach( (doc) => {
+    let messages = [];
+    
+    querySnapshot.forEach(async (doc) => {
+      console.log(doc.data())
       messages.push(doc.data());
       chatContainor.innerHTML = "";
       for (var i = 0; i < messages.length; i++) {
         let time = messages[i].timestamp ? moment(messages[i].timestamp.toDate()).fromNow() : moment().fromNow()
-        
         if (currentUid === messages[i].senderId) {
-
-
           chatContainor.innerHTML += `
           <div class="message-box left-message" id= "receiver-msg">
           <div class="msg" >
@@ -308,9 +297,7 @@ let getAllMessages = (chatId) => {
           <span>${time}</span>
           </div>
           
-          <span class="badge bg-danger"onclick="deletMsg('${messages[i].documentId}' , '${messages[i].message}')"  >Delet</span>
-          <span class="badge bg-secondary ">DeletforEveryone</span>
-          
+          <span class="badge bg-danger"onclick="deletMsg('${messages[i].documentId}' , '${messages[i].message}')">Delet</span>          
           </div>
           `
         }
@@ -323,18 +310,16 @@ let getAllMessages = (chatId) => {
     <span>${time}</span>
     </div>
     <div class="badge-box">
-    <span class="badge bg-danger"  onclick="deletMsg('${messages[i].documentId}' , '${messages[i].message}')">Delet</span>
-    <span class="badge bg-secondary ">DeletforEveryone</span>
     </div>
     </div>
     
     `
 
+
         }
       }
 
     })
-
   }
 
   )
@@ -365,14 +350,19 @@ window.addEventListener("focus",()=>{
 
 
 
-let deletMsg = async (messageId, messages) => {
+let deletMsg =  (messageId, messages) => {
 
 
   try {
     const messageRef = doc(db, "messages", messageId);
-    await deleteDoc(messageRef);
-    console.log("Message deleted successfully", messages);
+     deleteDoc(messageRef);
+    console.log("Message deleted successfully", messageId);
 
+   
+    const deleteLastMsg = document.getElementById("receiver-msg")
+    if(deleteLastMsg){
+      deleteLastMsg.remove()
+    }
   } catch (error) {
     console.error("Error deleting message: ", error);
   }
