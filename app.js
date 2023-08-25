@@ -76,8 +76,7 @@ updateProfile && updateProfile.addEventListener("click", async () => {
     console.log(imageUrl)
     const firestoreRef = doc(db, "users", uid);
     await updateDoc(firestoreRef, {
-        fullName: fullName.value,
-        phone: phone.value,
+     
         picture: imageUrl
     });
     hideloder()

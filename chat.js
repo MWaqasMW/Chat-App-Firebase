@@ -51,7 +51,7 @@ let img = "images/user.png"
       const q = query(collection(db, "users"), where("email", "!=", email));
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
           const UsersSec = document.getElementById("Users-sec");
-          UsersSec.innerHTML = ""; // Clear previous content
+          UsersSec.innerHTML = ""; 
           querySnapshot.forEach((doc) => {
               const { user, email, picture, uid, Active } = doc.data();
               console.log(user);
@@ -60,7 +60,7 @@ let img = "images/user.png"
                 <div>
                 <img src="${picture || img}" alt="" width="50px">
                 <div >
-                <div class="name">${user || "Unknown"}</div>
+                <div class="name">${user}</div>
               <div >${email}</div>
               </div>
               </div>
@@ -154,21 +154,14 @@ let getUserOne = async (fullName, email, picture, userSelectedId) => {
   let chatId = (currentUid > userSelectedId) ? (userSelectedId + currentUid) : (currentUid + userSelectedId);
   SelectedId = userSelectedId; // Update SelectedId
 
-  
-  if (picture === "undefined") {
-    if (email === "undefined") {
-      selectEmail.innerHTML = "@...";
-    }
-  
-    
+  selectUser.innerHTML = fullName;
+  selectEmail.innerHTML = email;
+
+  if (picture === "undefined") {   
     selectImg.src = "images/user.png"
-    
   }
-  else {
-    
+  else { 
     selectImg.src = picture;
-    selectUser.innerHTML = fullName;
-    selectEmail.innerHTML = email;
   }
 
   let rightContainor = document.getElementById("right-containor");

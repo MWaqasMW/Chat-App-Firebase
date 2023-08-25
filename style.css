@@ -227,7 +227,6 @@ font-size: 22px;
   align-items: center;
   padding: 1.3rem;
   height: auto;
-  
 }
 
  .top-L .title{
@@ -488,15 +487,14 @@ display: none;
 
 
 .message-box {
-  width: auto;
-
+  width: 55%;
   padding: 0.3rem;
   color: #667682;
   border-radius: 5px;
   
 }
 .message-box .msg{
-  width:55%;
+  width:auto;
   word-wrap: break-word;
   background-color: #ccd6df;
   padding: 0.6rem;
@@ -506,7 +504,8 @@ display: none;
 
 .message-box .msg  > span{
 font-size: 12px;
-font-weight: 1000;
+font-weight: 800;
+color: #0096FF;
 
 }
 
@@ -517,7 +516,8 @@ font-weight: 1000;
   }
 
 .message-box .msg1{
-  width: 55%;
+  
+  width: auto;
   word-wrap: break-word;
   background-color: #6daad7;
   padding: 1rem;
