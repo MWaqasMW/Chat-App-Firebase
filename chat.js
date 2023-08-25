@@ -22,82 +22,83 @@ let UsersSec = document.getElementById("Users-sec")
 
 
 
-let  searchUser=(data)=>{
-  let search = document.getElementById("search")
-let caseValue= search.value.toLowerCase()
 
-let arr=[]
-arr.push(data)
-let uArr= arr.filter(obj => obj.fullName === caseValue,
-  );
-  console.log(uArr)
 
-return uArr[0]
-}
 
-window.searchUser=searchUser;
+
+
+
 
 
 let showLoaderUsers = () => {
   let spinerUsers = document.getElementById("spinerUsers")
   spinerUsers.style.display = "block"
-
+  
 }
 let hideloderLoaderUsers = () => {
   let spinerUsers = document.getElementById("spinerUsers")
   spinerUsers.style.display = "none"
-
+  
 }
 
 let img = "images/user.png"
 
 
-const users =[]
-let getAllUsers = async (email) => {
 
-  const q = query(collection(db, "users"), where("email", "!=", email));
-  const unsubscribe = onSnapshot(q, (querySnapshot) => {
-  showLoaderUsers() || querySnapshot.forEach((doc) => {
-    users.push(doc.data());
+
+
+    let getAllUsers = async (email) => {
+      const q = query(collection(db, "users"), where("email", "!=", email));
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+          const UsersSec = document.getElementById("Users-sec");
+          UsersSec.innerHTML = ""; // Clear previous content
+          querySnapshot.forEach((doc) => {
+              const { user, email, picture, uid, Active } = doc.data();
+              console.log(user);
+              UsersSec.innerHTML += `
+              <li  onclick="getUserOne('${user}','${email}','${picture}','${uid}')">
+                <div>
+                <img src="${picture || img}" alt="" width="50px">
+                <div >
+                <div class="name">${user || "Unknown"}</div>
+              <div >${email}</div>
+              </div>
+              </div>
+              <div >
+              <div class="${Active ? "green" : "red"} p-1"></div>
+                </div>
+              </li>`;
+          });
+      });
+  }
+
   
-hideloderLoaderUsers()
-
-  // const { fullName, email, picture, uid, Active  } = user;
-
-      
-
-  const { fullName, email, picture, uid, Active,notification } = doc.data()
-  UsersSec.innerHTML += `
-  <li onclick="getUserOne('${fullName}','${email}','${picture}','${uid}')">
-  <div>
-  <img src="${picture || img}" alt="" width="50px">
-  <div >
-  <div class="name">${fullName || "Unknown"}</div>
-<div >${email}</div>
-</div>
-</div>
-<div class=d-block'>
-<div class="notify p-1">
-${notification ?  `<span class="badge bg-danger rounded-pill ">${notification}</span>` : ""}
-</div>
-<div class="${Active ? "green" : "red"} p-1"></div>
-  </div>
-  </li>
   
-  `
-        
-      
-      
-
+  let filterUsers = () => {
+    let search = document.getElementById("search");
+    let caseValue = search.value.toLowerCase();
+    const UsersSec = document.getElementById("Users-sec");
+    const userListItems = UsersSec.getElementsByTagName("li");
     
-    // console.log(notification)
-      
-    })
-      })
-  
+    for (let i = 0; i < userListItems.length; i++) {
+      const nameElement = userListItems[i].querySelector(".name");
+      if ( nameElement && nameElement.innerText.toLowerCase().includes(caseValue)) {
+        userListItems[i].style.display = "flex";
+
+        } else {
+          userListItems[i].style.display = "none";
+        }
+      }
     }
+  
+window.getAllUsers=getAllUsers
+window.filterUsers =filterUsers
     
+let search = document.getElementById("search");
 
+search.addEventListener("input",(e)=>{
+filterUsers()
+})
 
 
 
@@ -137,63 +138,9 @@ onAuthStateChanged(auth, async (user) => {
   }
 });
 
-// let SelectedId;
-
-// let getUserOne = async(fullName, email, picture, userSelectdId) => {
-
-  
-//   let beforeContainor = document.getElementById("before-containor")
-//   beforeContainor.style.display="none";
-//   // let chatContainor = document.getElementById("chatContainor");
-
-//   // chatContainor.innerHTML = "";
-
-//   let selectUser = document.getElementById("select-user");
-//   let selectEmail = document.getElementById("select-email");
-//   let selectImg = document.getElementById("select-img");
 
 
-//   let currentUid = localStorage.getItem('uid')
-//   let chatId;
-//   if (currentUid > SelectedId) {
-//     chatId = SelectedId + currentUid
-//   } else {
-//     chatId = currentUid + SelectedId
-//   }
-  
-//   SelectedId = userSelectdId
-//   getAllMessages(chatId);
-  
-  
-  
-//   if (picture == "undefined") {
-//     if (email == "undefined") {
-//       selectEmail.innerHTML = "@...";
-//     }
-//     if (fullName === "undefined") {
-//       selectUser.innerHTML = "Unknown"
-//     }
-    
-//     selectImg.src = "images/user.png"
-    
-//   }
-//   else {
-    
-//     selectImg.src = picture;
-//     selectUser.innerHTML = fullName;
-//     selectEmail.innerHTML = email;
-//   }
-  
-  
-//   let rightContainor = document.getElementById("right-containor");
-//   rightContainor.style.display = "block"
-  
-  
-
- 
-// }
-
-let SelectedId = ''; // Initialize SelectedId
+let SelectedId = ''; 
 
 let getUserOne = async (fullName, email, picture, userSelectedId) => {
   let beforeContainor = document.getElementById("before-containor");
@@ -207,28 +154,27 @@ let getUserOne = async (fullName, email, picture, userSelectedId) => {
   let chatId = (currentUid > userSelectedId) ? (userSelectedId + currentUid) : (currentUid + userSelectedId);
   SelectedId = userSelectedId; // Update SelectedId
 
-  getAllMessages(chatId);
-
-  if (!picture || picture === "undefined") {
-    selectImg.src = "images/user.png";
-    selectUser.innerHTML = fullName ? fullName : "Unknown";
-    selectEmail.innerHTML = email ? email : "@...";
-  } else {
+  
+  if (picture === "undefined") {
+    if (email === "undefined") {
+      selectEmail.innerHTML = "@...";
+    }
+  
+    
+    selectImg.src = "images/user.png"
+    
+  }
+  else {
+    
     selectImg.src = picture;
-    selectUser.innerHTML = fullName ? fullName : "Unknown";
-    selectEmail.innerHTML = email ? email : "@...";
+    selectUser.innerHTML = fullName;
+    selectEmail.innerHTML = email;
   }
 
   let rightContainor = document.getElementById("right-containor");
   rightContainor.style.display = "block";
+  getAllMessages(chatId);
 };
-
-
-
-
-
-
-
 
 
 
@@ -291,6 +237,59 @@ let onSend=async()=> {
 
 
 
+let getAllMessages = (chatId) => {
+  let chatContainor = document.getElementById("chatContainor");
+  let currentUid = localStorage.getItem('uid');
+  const q = query(collection(db, "messages"), orderBy("timestamp", "desc"), where("chatId", "==", chatId));
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    let messages = [];
+
+    querySnapshot.forEach((doc) => {
+      messages.push(doc.data());
+    });
+
+    chatContainor.innerHTML = ""; // Clear the container before adding messages
+    messages.forEach((message) => {
+      let time = message.timestamp ? moment(message.timestamp.toDate()).fromNow() : moment().fromNow();
+      if (currentUid === message.senderId) {
+        chatContainor.innerHTML += `
+          <div class="message-box left-message" id="receiver-msg">
+            <div class="msg">
+              ${message.message}
+              <br>
+              <span>${time}</span>
+            </div>
+            <div class="badge bg-danger" onclick="deletMsg('${message.documentId}', '${message.message}')">Delete</div>
+          </div>
+        `;
+      } else {
+        chatContainor.innerHTML += `
+          <div class="message-box right-message">
+            <div class="msg1">
+              ${message.message}
+              <br>
+              <span>${time}</span>
+            </div>
+            <div class="badge-box"></div>
+          </div>
+        `;
+      }
+    });
+  });
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -350,25 +349,6 @@ let deletMsg =  (messageId, messages) => {
     console.error("Error deleting message: ", error);
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 window.deletMsg = deletMsg;
@@ -376,45 +356,5 @@ window.deletMsg = deletMsg;
 
 
 
-let getAllMessages = (chatId) => {
-  let chatContainor = document.getElementById("chatContainor");
-  let currentUid = localStorage.getItem('uid');
-  const q = query(collection(db, "messages"), orderBy("timestamp", "desc"), where("chatId", "==", chatId));
-  const unsubscribe = onSnapshot(q, (querySnapshot) => {
-    let messages = [];
-
-    querySnapshot.forEach((doc) => {
-      messages.push(doc.data());
-    });
-
-    chatContainor.innerHTML = ""; // Clear the container before adding messages
-    messages.forEach((message) => {
-      let time = message.timestamp ? moment(message.timestamp.toDate()).fromNow() : moment().fromNow();
-      if (currentUid === message.senderId) {
-        chatContainor.innerHTML += `
-          <div class="message-box left-message" id="receiver-msg">
-            <div class="msg">
-              ${message.message}
-              <br>
-              <span>${time}</span>
-            </div>
-            <span class="badge bg-danger" onclick="deletMsg('${message.documentId}', '${message.message}')">Delete</span>
-          </div>
-        `;
-      } else {
-        chatContainor.innerHTML += `
-          <div class="message-box right-message">
-            <div class="msg1">
-              ${message.message}
-              <br>
-              <span>${time}</span>
-            </div>
-            <div class="badge-box"></div>
-          </div>
-        `;
-      }
-    });
-  });
-};
 
 
