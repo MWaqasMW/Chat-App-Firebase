@@ -1,27 +1,35 @@
 // import {db,auth, onAuthStateChanged,getStorage ,collection, addDoc, doc, getDoc, updateDoc, getDocs, where, query, onSnapshot, serverTimestamp, orderBy, deleteDoc  } from "./firebase";
 import {onAuthStateChanged  } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
 import {collection, addDoc, doc, getDoc, updateDoc, getDocs, where, query, onSnapshot, serverTimestamp, orderBy, deleteDoc,increment} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
-import { getStorage} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js";
 import {db,auth} from './firebase.js'
 
 
 
 
+// JavaScript code
+const modeToggle = document.getElementById("mode-toggle");
+const body = document.body;
+const topL= document.querySelector('.top-L')
 
 
-const storage = getStorage();
+modeToggle.addEventListener("click", () => {
+topL.classList.toggle("top-dark")
+  body.classList.toggle("dark-mode");
+  body.classList.toggle("light-mode");
+});
 
 
 
+let backToUser=()=>{
+let leftContainor = document.getElementById("leftContainor");
+leftContainor.style.display ="block"
+
+let rightContainor = document.getElementById("right-containor");
+rightContainor.style.display = "none"
+}
 
 
-let UsersSec = document.getElementById("Users-sec")
-
-
-
-
-
-
+window.backToUser= backToUser;
 
 
 
@@ -61,7 +69,7 @@ let img = "images/user.png"
                 <img src="${picture || img}" alt="" width="50px">
                 <div >
                 <div class="name">${user}</div>
-              <div >${email}</div>
+              <span>${email}</span>
               </div>
               </div>
               <div >
@@ -143,9 +151,15 @@ onAuthStateChanged(auth, async (user) => {
 let SelectedId = ''; 
 
 let getUserOne = async (fullName, email, picture, userSelectedId) => {
+
+let leftContainor = document.getElementById("leftContainor")
+leftContainor.style.display = "none";
+
+let rightContainor = document.getElementById("right-containor");
+rightContainor.style.display = "block";
+
   let beforeContainor = document.getElementById("before-containor");
   beforeContainor.style.display = "none";
-
   let selectUser = document.getElementById("select-user");
   let selectEmail = document.getElementById("select-email");
   let selectImg = document.getElementById("select-img");
@@ -164,8 +178,7 @@ let getUserOne = async (fullName, email, picture, userSelectedId) => {
     selectImg.src = picture;
   }
 
-  let rightContainor = document.getElementById("right-containor");
-  rightContainor.style.display = "block";
+
   getAllMessages(chatId);
 };
 
@@ -346,6 +359,24 @@ let deletMsg =  (messageId, messages) => {
 
 window.deletMsg = deletMsg;
 
+
+const mediaQuery = window.matchMedia('(max-width: 768px)');
+
+function handleMediaQueryChange(event) {
+  if (event.matches) {
+      // Media query condition is met (viewport width is <= 768px)
+      // Write your code here for smaller screens
+  } else {
+      // Media query condition is not met (viewport width is > 768px)
+      // Write your code here for larger screens
+  }
+}
+
+// Attach the listener function to the media query
+mediaQuery.addListener(handleMediaQueryChange);
+
+// Initially, also call the function to handle the current state
+handleMediaQueryChange(mediaQuery);
 
 
 

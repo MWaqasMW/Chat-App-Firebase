@@ -14,20 +14,26 @@
 
 </head>
 
-<body>
+<body class="light-mode">
 
   <div class="chat-section">
-    <div class="left-contionor">
+    <div class="left-contionor" id="leftContainor">
       <div class="top-L">
         <div class="top-L">
           <img src="./images/user.png" alt="" width="80px" id="uProfile_img" class="img">
           <div><span class="title" id="uName"></span>
-            <div id="uEmail"></div>
+            <div class="uEmail" id="uEmail"></div>
           </div>
         </div>
+        <div class="d-flex align-items-center">
         <a href="profile.html">
-          <div class="profile-opt"><i class="bi bi-backspace"></i></div>
+          <div class="profile-opt1"><i class="bi bi-backspace"></i></div>
         </a>
+        <div class="form-check form-switch ">
+          <input class="form-check-input mode-btn" type="checkbox" role="switch" id="mode-toggle" >
+          <label class="form-check-label" for="mode-toggle"></label>
+        </div>
+        </div>
       </div>
 
       <div class="container-input m-3">
@@ -60,15 +66,14 @@
         <div class="top-L">
           <img src="images/user.png" width="80px" id="select-img">
           <div><span class="title" id="select-user"></span>
-            <div id="select-email"></div>
+            <div class="uEmail" id="select-email"></div>
           </div>
         </div>
-        <div class="profile-opt">
-          <div><i class="bi bi-bell"></i><i class="bi bi-heart"></i></div>
+        <div class="profile-opt" onclick="backToUser()">
+          <i class="bi bi-arrow-left"></i>
         </div>
       </div>
-    <hr>
-    <hr>
+   <hr>
       <div class="chat-containor" id="chatContainor">
         <!-- inner html this sec -->
       </div>

@@ -108,17 +108,23 @@ signupBtn && signupBtn.addEventListener("click",async () => {
   let phone = document.getElementById("user-number")
   let user = document.getElementById("user-name")
 
-
-  let userData = {
-    user: user.value,
-    phone: phone.value,
-    email: email.value,
-    password: password.value,
   
+  function validateEmail(remail) {
+    const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return pattern.test(remail);
   }
 
-
-
+  if(user.value.length >=3 && typeof(user.value)=== "string"){
+    let userData = {
+      user: user.value,
+      phone: phone.value,
+      email: email.value,
+      password: password.value,
+      
+    }
+    
+    
+    
   showloder() || createUserWithEmailAndPassword(auth, userData.email, userData.password)
 
     .then(async (userCredential) => {
@@ -130,10 +136,10 @@ signupBtn && signupBtn.addEventListener("click",async () => {
           ...userData,
           uid: user.uid,
           
-
-
+          
+          
         });
-
+        
         //  localStorage.setItem("userId",user.uid ,)
         location.href = "index.html"
         // console.log("Document written with ID: ", docRef.id);
@@ -149,7 +155,14 @@ signupBtn && signupBtn.addEventListener("click",async () => {
       const errorMessage = error.message;
       sweetAlert("Oops...", error.message, "error");
     })
-
+  }
+  else{
+    sweetAlert("Oops...", "please make shower your User name must be 3 to above character ", "error");
+    hideloder()
+    let waqas =validateEmail("example@example.iom")
+console.log(waqas);
+  }
+    
 })
 
 

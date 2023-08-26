@@ -17,7 +17,7 @@
     <p class="heading">Signup</p>
 
 <div class="inputContainer">
-    <img src="images/user.png" alt=""><input type="text"  class="inputField" id="user-name" placeholder="User" required>
+    <img src="images/user.png" alt=""><input type="text"  class="inputField" id="user-name" placeholder="Full Name" required>
 
     </div>
     <div class="inputContainer">
@@ -27,7 +27,7 @@
 
     <div class="inputContainer">
        <img src="images/arroba.png" alt="">
-    <input type="email" class="inputField" id="user-email" placeholder="Email"  required >
+    <input type="email" class="inputField" id="user-email" placeholder="example@example.com"  required >
     </div>
     
 <div class="inputContainer">
@@ -37,10 +37,13 @@
               
            
 <div><button id="signUp" class="my-btn">SignUp</button> </div>
+<div id="passwordHelpBlock" class="form-text">
+  Your password must be 6-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+</div>
 <a href="index.html">Login</a>
-<div>
-    <a class="forgotLink" href="#">Forgot your password?</a>
-      <div class="loader" id="loader"></div>
+
+  <div class="loader" id="loader"></div>
+   
     
   </div>
 </div>
